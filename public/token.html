@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Frontend</title>
+</head>
+<style>
+body {
+    display: grid;
+    justify-content: center;
+     align-items: center;
+  background-color: palegoldenrod;
+   width: 100%;
+   height: 100vh;
+   margin: 0;
+    border: 5px solid black;
+}
+.container {
+    border: 5px solid black;
+   width: 600px;
+   height: 30vh;
+   background-color: beige;
+
+  display: block;
+  flex-direction: row;
+     font-size: 15px;
+}
+.header {
+    width: 100%;
+    height: 50px;
+    background-color: black;
+}
+h1 {
+    border: 4px solid black;
+    height: 50px;
+}
+</style>
+<body>
+    <div class="container">
+        <div class="header"> Header </div>
+    <h1>Previous Value: <span id="previous-value"></span></h1>
+    <h1>Latest Value: <span id="latest-value"></span></h1>
+
+</div>
+    <div class="container">
+        <div class="header"> Header </div>
+        <h1>Previous Value: <span id="previous-value"></span></h1>
+        <h1>Latest Value: <span id="latest-value"></span></h1>
+
+    </div>
+        <div class="container">
+            <div class="header"> Header </div>
+            <h1>Previous Value: <span id="previous-value"></span></h1>
+            <h1>Latest Value: <span id="latest-value"></span></h1>
+
+        </div>
+    <script>
+        let previousValue = null;
+        const previousValueElement = document.getElementById('previous-value');
+        const latestValueElement = document.getElementById('latest-value');
+
+        function fetchValue() {
+            // Fetch the value from the server
+            fetch('/fetch-value')
+                .then(response => response.text())
+                .then(latestValue => {
+                    // Update the latest value on the webpage
+                    latestValueElement.innerText = latestValue;
+
+                    // Set the previous value and update the webpage
+                    if (previousValue !== null) {
+                        previousValueElement.innerText = previousValue;
+                    }
+                    previousValue = latestValue;
+                })
+                .catch(error => console.error(error));
+        }
+
+        // Call fetchValue every 30 seconds
+        setInterval(fetchValue, 300000);
+
+        // Call fetchValue immediately to display the latest value
+        fetchValue();
+    </script>
+</body>
+
+</html>
