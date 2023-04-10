@@ -4,7 +4,7 @@
   "main": "./bin/www",
   "scripts": {
     "start": "node./bin/www",
-    "build": "npx prettier --write '**/*.js' && rm -rf ./build && mkdir -p ./build && cp -r ./public ./views ./routes ./app.js ./package.json ./package-lock.json ./build && cd ./build && npm install --production"
+    "build": "npx prettier --write '**/*.js' && rm -rf ./build && mkdir -p ./build && cp -r ./public ./routes ./app.js ./package.json ./package-lock.json ./build && cd ./build && npm install --production"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
