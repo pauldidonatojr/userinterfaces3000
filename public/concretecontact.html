@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Contact Form - Construction Company</title>
+    <script>
+
+    function generatePDF() {
+        // Get the form data
+        const full_name = document.querySelector('input[name=full_name]').value
+        const company_name = document.querySelector(
+            'input[name=company_name]'
+        ).value
+        const email = document.querySelector('input[name=email]').value
+        const phone = document.querySelector('input[name=phone]').value
+        const location = document.querySelector('input[name=location]').value
+        const project_type = document.querySelector(
+            'input[name=project_type]'
+        ).value
+        const project_size = document.querySelector(
+            'input[name=project_size]'
+        ).value
+        const completion_date = document.querySelector(
+            'input[name=completion_date]'
+        ).value
+        const message = document.querySelector('textarea[name=message]').value
+
+        // Create a new jsPDF instance
+        const doc = new jsPDF()
+
+        // Set the document properties
+        doc.setProperties({
+            title: 'Resume',
+            author: 'Your Name',
+            keywords: 'resume, job, experience',
+        })
+
+        // Set the font size and text color
+        doc.setFontSize(14)
+        doc.setTextColor('#333')
+
+        // Add the header
+        doc.text(`Full Name: ${full_name}`, 105, 20, { align: 'center' })
+        doc.text(`Company Name: ${company_name}`, 105, 30, { align: 'center' })
+        doc.text(`Email: ${email}`, 105, 40, { align: 'center' })
+        doc.text(`Phone: ${phone}`, 105, 50, { align: 'center' })
+
+        // Add the contact information
+        doc.setLineWidth(0.5)
+        doc.setDrawColor('#333')
+        doc.rect(20, 70, 170, 120) // outer border
+        doc.setFontSize(16)
+        doc.setFontStyle('bold')
+        doc.text('Contact Information', 95, 80, { align: 'center' })
+        doc.setFontSize(12)
+        doc.setFontStyle('normal')
+        doc.text(`Project Type: ${project_type}`, 30, 100)
+        doc.line(30, 102, 110, 102) // inner border
+        doc.text(`Project Size: ${project_size}`, 30, 110)
+        doc.line(30, 112, 110, 112) // inner border
+        doc.text(`Completion Date: ${completion_date}`, 30, 120)
+        doc.line(30, 122, 110, 122) // inner border
+        doc.text(`Location: ${location}`, 30, 130)
+        doc.line(30, 132, 110, 132) // inner border
+
+        // Add the message
+        doc.setFontSize(12)
+        doc.text(`Message: ${message}`, 30, 160)
+
+        // Save the PDF document
+        doc.save('contact-form.pdf')
+    }
+
+
+
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        #contact {
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+
+        #contact h2 {
+            margin-top: 0;
+        }
+
+        #contact ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #contact li {
+            margin-bottom: 10px;
+        }
+
+        #main {
+            padding: 20px;
+        }
+
+        #main h2 {
+            margin-top: 0;
+        }
+
+        #main h3 {
+            margin-top: 20px;
+        }
+
+        #main ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #main li {
+            margin-bottom: 10px;
+            font-size: 25px;
+        }
+
+        #footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* New input styles */
+        input[type=text],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+     <div id="header">
+        <h1>Contact Us</h1>
+        <button onclick="goBack()">Go Back</button>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+        <div id="contact">
+            <h2>Contact Information</h2>
+            <ul>
+                <li>Full Name: <input type="text" name="full_name"></li>
+                <li>Company Name: <input type="text" name="company_name"></li>
+                <li>Email: <input type="email" name="email"></li>
+                <li>Phone Number: <input type="tel" name="phone"></li>
+                <li>Type of Concrete Work Needed: <input type="text" name="project_type"></li>
+                <li>Size of Project: <input type="text" name="project_size"></li>
+                <li>Completion Date: <input type="date" name="completion_date"></li>
+                <li>Location of Project: <input type="text" name="location"></li>
+            </ul>
+        </div>
+        <div id="main">
+            <fieldset>
+                <legend>Message</legend>
+                <label for="message">Message:</label><br>
+                <textarea name="message" id="message" cols="30" rows="10"></textarea><br>
+            </fieldset>
+            <button onclick="generatePDF()">Generate PDF</button>
+        </div>
+    </div>
+</body>
+
+</html>

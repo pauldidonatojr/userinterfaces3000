@@ -95,11 +95,11 @@ app.post('/validate', (req, res) => {
     const { username, password } = req.body
 
     // handle form submission
-    if (username === 'admin' && password === 'password123') {
+    if (username === 'admin' && password === 'Richmond2023@') {
         res.set('Authorization', 'Bearer mytoken')
-        res.redirect('./token.html')
+        res.redirect('./homepage.html')
     } else {
-        res.status(401).send('Incorrect username or password.')
+        res.redirect('./index.html')
     }
 })
 
