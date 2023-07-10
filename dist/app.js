@@ -92,6 +92,7 @@ app.post('/validate', (req, res) => {
     username,
     password
   } = req.body;
+  console.log("here")
 
   // handle form submission
   if (username === 'admin' && password === 'password123') {
